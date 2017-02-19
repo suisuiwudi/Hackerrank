@@ -1,4 +1,4 @@
-package UniversityCodeSprint2_SeperateTheNumbers;
+package SeperatetheNumbers;
 
 import java.io.*;
 import java.util.*;

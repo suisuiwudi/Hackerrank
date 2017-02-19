@@ -1,4 +1,4 @@
-package UniversityCodeSprint2_BreakingTheRecords;
+package BreakingtheRecords;
 
 import java.io.*;
 import java.util.*;
