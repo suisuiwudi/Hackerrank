@@ -16,7 +16,6 @@ public class Solution {
 		public boolean[] searched;
 		public boolean[] parent;
 		public int[] rightGuess;
-		public int[] wrongGuess;
 		public int win;
 		public int searchNum;
 		private int V;
@@ -27,7 +26,6 @@ public class Solution {
 			adj = new LinkedList[V];
 			sonGuess = new HashSet[V];
 			parentGuess = new HashSet[V];
-			wrongGuess = new int[V];
 			rightGuess = new int[V];
 			searchNum = 0;
 			searched = new boolean[V];
@@ -35,7 +33,6 @@ public class Solution {
 				adj[i] = new LinkedList<Integer>();
 				sonGuess[i] = new HashSet<Integer>();
 				parentGuess[i] = new HashSet<Integer>();
-				wrongGuess[i] = 0;
 				rightGuess[i] = 0;
 				searched[i] = false;
 			}
@@ -59,10 +56,8 @@ public class Solution {
 			searchNum++;
 			for (int w : this.adj(v)) {
 				if (!searched[w]) {
-					if (this.parentGuess[v].contains(w)) wrongGuess[v]++;
 					if (this.sonGuess[v].contains(w)) rightGuess[v]++;
 					guessSearch(w);
-					wrongGuess[v] += wrongGuess[w];
 					rightGuess[v] += rightGuess[w];
 				}
 			}
