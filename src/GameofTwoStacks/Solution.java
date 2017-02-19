@@ -24,19 +24,19 @@ public class Solution {
 				b[b_i] = in.nextInt();
 			}
 			// your code goes here
-			int[] suma = new int[n + 1];
+			long[] suma = new long[n + 1];
 			suma[0] = 0;
 			for (int i = 0; i < n; i++) {
 				suma[i + 1] = suma[i] + a[i];
 			}
-			int[] sumb = new int[m + 1];
+			long[] sumb = new long[m + 1];
 			sumb[0] = 0;
 			for (int i = 0; i < m; i++) {
 				sumb[i + 1] = sumb[i] + b[i];
 			}
 			int lowNums = 0;
-			int upNums = n + m;
-			while (lowNums < upNums) {
+			int upNums = n + m + 1;
+			while (lowNums + 1 < upNums) {
 				int middle = (lowNums + upNums) / 2;
 				boolean flag = false;
 				for (int i = Math.max(0, middle - m); i <= Math.min(n, middle); i++) {
@@ -46,12 +46,12 @@ public class Solution {
 					}
 				}
 				if (flag) {
-					lowNums = middle + 1;
+					lowNums = middle;
 				} else {
 					upNums = middle;
 				}
 			}
-			System.out.println(lowNums - 1);
+			System.out.println(lowNums);
 		}
 	}
 
