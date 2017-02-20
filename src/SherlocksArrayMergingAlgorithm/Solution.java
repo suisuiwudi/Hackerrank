@@ -26,10 +26,6 @@ public class Solution {
     		ans += count;
     		return;
     	}
-    	if (j!=1 && preRow == 0){
-    		ans += count;
-    		return;
-    	}
     	if (m[i]>m[i-1]){
 	    	if (j == 1){
 	    		dfs(m,i+1,j,k+1,nowRow+1,preRow+1,count);
