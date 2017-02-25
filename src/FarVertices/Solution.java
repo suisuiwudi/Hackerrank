@@ -1,29 +1,29 @@
-package DemandingMoney;
+package FarVertices;
 
-import java.io.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 
 public class Solution {
+
 	public static class Graph {
 		private List[] adj;
-		public int[] money;
-		public int ans;
-		public int win;
-		public int searchNum;
-		public int[][] getMoney;
-		public int[][] count;
 		public boolean[] searched;
+		public int searchNum;
 		private int V;
 		private int E;
 
 		public Graph(int V) {
 			this.V = V;
 			adj = new LinkedList[V];
-			money = new int[V];
 			searchNum = 0;
-			ans = 0;
+			searched = new boolean[V];
 			for (int i = 0; i < V; i++) {
 				adj[i] = new LinkedList<Integer>();
+				searched[i] = false;
 			}
 		}
 
@@ -37,26 +37,17 @@ public class Solution {
 			return adj[v];
 		}
 
-		public void setMoney(int v, int value) {
-			money[v] = value;
-		}
-
-		public void search(int v) {
+		public void rangeSearch(int v,int d,int k) {
 			searched[v] = true;
-			if (value > ans) {
-				ans = value;
-				count = 1;
-			} else if (value == ans)
-				count++;
+			searchNum++;
+			if (d == k) return;
 			for (int w : this.adj(v)) {
 				if (!searched[w]) {
-					search(w);
-					getMoney[v][0] = getMoney[w][1]  getMoney[w][0]
-							
+					rangeSearch(w,d+1,k);
 				}
 			}
-			
 		}
+
 	}
 
 	public static void main(String[] args) {
@@ -66,18 +57,22 @@ public class Solution {
 		 */
 		Scanner in = new Scanner(System.in);
 		int n = in.nextInt();
-		int m = in.nextInt();
-		Graph g = new Graph(n);
-		for (int i = 0; i < n; i++) {
-			g.money[i] = in.nextInt();
-		}
-		for (int i = 0; i < m; i++) {
+		int k = in.nextInt();
+		Graph graph = new Graph(n);
+		for (int i = 0; i < n - 1 ; i++){
 			int v = in.nextInt();
 			int w = in.nextInt();
-			g.addEdge(v - 1, w - 1);
+			graph.addEdge(v-1, w-1);
 		}
-		Arrays.fill(g.searched, false);
-		g.search(0, false, 0);
-		System.out.println(g.ans + " " + g.count);
+		int ans = Integer.MAX_VALUE;
+		for (int i = 0; i < n ; i++){
+			graph.searchNum = 0;
+			Arrays.fill(graph.searched, false);
+			graph.rangeSearch(i,0,k);
+			System.out.println(graph.searchNum);
+			ans = Math.min(ans, n - graph.searchNum);
+		}
+		System.out.println(ans);
+		
 	}
 }
